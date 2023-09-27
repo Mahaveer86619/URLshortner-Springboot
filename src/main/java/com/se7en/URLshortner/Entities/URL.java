@@ -21,13 +21,17 @@ public class URL {
     private Long id;
 
     private String originalURL;
+    private String shortURL;
     private String shortKey;
 
     // Creation time of the short URL
-    private final LocalDateTime creationTime = LocalDateTime.now();
+    private LocalDateTime creationTime;
 
     // Expiry date for the short URL
     private LocalDateTime expiryDate;
+
+    //custom keyword
+    private String customKeyword;
 
     // Relationships
     @ManyToOne
