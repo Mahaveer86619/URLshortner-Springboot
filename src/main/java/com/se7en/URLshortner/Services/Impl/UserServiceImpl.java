@@ -44,7 +44,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public Optional<UserDTO> findUserByEmail(String email) {
 
-        User user = this.repo.findByEmail(email);
+        Optional<User> user = this.repo.findByEmail(email);
 
         return Optional.ofNullable(this.mapper.map(user, UserDTO.class));
     }

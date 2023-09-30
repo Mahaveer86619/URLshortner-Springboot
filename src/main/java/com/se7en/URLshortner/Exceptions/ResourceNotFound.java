@@ -7,15 +7,25 @@ import lombok.Setter;
 @Setter
 public class ResourceNotFound  extends RuntimeException {
 
-    String resourse_name;
+    String resource_name;
     String field_name;
-    long field_value;
+    long field_value_int;
+    String field_value_string;
 
 
-    public ResourceNotFound(String resourse_name, String field_name, long field_value) {
-        super("%s not found with %s : %s".formatted(resourse_name, field_name, field_value));
-        this.resourse_name = resourse_name;
+    // if the field value is ID then it is Long
+    public ResourceNotFound(String resource_name, String field_name, long field_value) {
+        super("%s not found with %s : %s".formatted(resource_name, field_name, field_value));
+        this.resource_name = resource_name;
         this.field_name = field_name;
-        this.field_value = field_value;
+        this.field_value_int = field_value;
+    }
+
+    // but if it is String like email then String
+    public ResourceNotFound(String resource_name, String field_name, String field_value) {
+        super("%s not found with %s : %s".formatted(resource_name, field_name, field_value));
+        this.resource_name = resource_name;
+        this.field_name = field_name;
+        this.field_value_string = field_value;
     }
 }
