@@ -1,11 +1,9 @@
 package com.se7en.URLshortner.Entities;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
@@ -15,6 +13,7 @@ import java.util.List;
 @Table(name = "users")
 @Getter
 @Setter
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class User implements UserDetails { // To implement the security permissions for every user implement the UserDetails
@@ -32,13 +31,16 @@ public class User implements UserDetails { // To implement the security permissi
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<URL> urls;
 
+    @Enumerated(EnumType.STRING)
+    private Role role; // user or registered_user
+
     // Below are the functions for auth check
     // can also manage these features by making a atribute of User and storing them in database
     // each time a function below is called like isAccountNonExpired() the attribute can be set
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
+        return List.of(new SimpleGrantedAuthority(role.name()));
     }
 
     @Override

@@ -13,9 +13,9 @@ public class UrLshortnerApplication {
 	}
 
 	// created a config for this
-//	@Bean
-//	public ModelMapper modelMapper(){
-//		return new ModelMapper();
-//	}
+	@Bean
+	public ModelMapper modelMapper(){
+		return new ModelMapper();
+	}
 
 }

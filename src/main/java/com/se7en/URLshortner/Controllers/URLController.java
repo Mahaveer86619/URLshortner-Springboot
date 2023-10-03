@@ -30,7 +30,7 @@ public class URLController {
         URLDTO createUrlDTO = this.urlService.saveURL(urlDTO);
 
         // Include the short URL in the response
-        String shortURL = "http://localhost:8080/" + createUrlDTO.getShortKey();
+        String shortURL = "http://localhost:8080/" + "go/" + createUrlDTO.getShortKey();
         createUrlDTO.setShortURL(shortURL);
 
         return new ResponseEntity<>(createUrlDTO, HttpStatus.CREATED);
@@ -63,7 +63,7 @@ public class URLController {
         return ResponseEntity.ok(updatedUrlDTO);
     }
 
-    @GetMapping("/{shortKey}")
+    @GetMapping("/go/{shortKey}")
     public ResponseEntity<Void> redirectToOriginalURL(@PathVariable String shortKey, HttpServletResponse response) {
         // Retrieve the URL entity with the given short key from the database
         Optional<URL> urlOptional = this.repo.findByShortKey(shortKey);
